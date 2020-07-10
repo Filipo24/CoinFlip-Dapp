@@ -1,0 +1,24 @@
+
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+
+@keyframes coinflip_animation_win {
+  from {transform: rotateY(0deg);}
+  to {transform: rotateY(1800deg);}
+}
+@keyframes coinflip_animation_loss {
+  from {transform: rotateY(0deg);}
+  to {transform: rotateY(1980deg);}
+}
+
+
+.coin_animate_win {
+  animation-name: coinflip_animation_win;
+  animation-duration: 5s;
+}
+
+.coin_animate_loss {
+  animation-name: coinflip_animation_loss;
+  animation-duration: 5s;
+}
