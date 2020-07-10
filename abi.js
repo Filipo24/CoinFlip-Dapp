@@ -19,6 +19,12 @@ var abi = [
         "internalType": "bool",
         "name": "betResult",
         "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "valueBack",
+        "type": "uint256"
       }
     ],
     "name": "Result",
@@ -56,21 +62,6 @@ var abi = [
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "result",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "betResult",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "internalType": "uint256",
@@ -79,7 +70,13 @@ var abi = [
       }
     ],
     "name": "placeBet",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "betResult",
+        "type": "bool"
+      }
+    ],
     "payable": true,
     "stateMutability": "payable",
     "type": "function"

@@ -4,7 +4,7 @@ var selection;
 
 $(document).ready(function() {
     window.ethereum.enable().then(function(accounts){
-      contractInstance =  new web3.eth.Contract(abi, "0x6B47B153F2cdBBa46F42a930faA0c3ce801550D8",{from: accounts[0]});
+      contractInstance =  new web3.eth.Contract(abi, "0x4E730b2693E8f49514Ff8c08EedF8a66818B648A",{from: accounts[0]});
       console.log(contractInstance);
     });
 
@@ -38,7 +38,6 @@ function coinFlip(){
           value : web3.utils.toWei(betValueString,"ether"),
           gas : 2100000
         }
-        console.log("Selection is: " +selection);
         contractInstance.methods.placeBet(selection).send(config)
         .on("transactionHash", function(hash){
           console.log(hash);
@@ -48,14 +47,8 @@ function coinFlip(){
         })
         .on("receipt", function(receipt){
           console.log(receipt);
-        })
-        .then(function(){
-        contractInstance.methods.result().send()
-        .on("receipt", function(receipt){
-          console.log(receipt);
           if (receipt.events.Result.returnValues.betResult == true) {
-            console.log("Receipt here");
-            console.log(receipt.events.Result.returnValues.betResult);
+            console.log("Bet result is: "+receipt.events.Result.returnValues.betResult);
             $(".coin_picture").toggleClass("coin_animate_win");
             $(".coin_picture").one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend animationend",
                         function(event) {
@@ -75,8 +68,6 @@ function coinFlip(){
             });
           }
         })
-      });
-      /*console.log("Bet sent: "+betValue+"ETH");*/
     }else{
       alert("You need to select a value for your bet larger than 0!");
     }

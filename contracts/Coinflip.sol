@@ -25,7 +25,7 @@ contract Coinflip{
 
   mapping (address => Gambler) private bets;
 
-  event Result (address player, bool betResult);
+  event Result (address player, bool betResult, uint valueBack);
 
 
     function random() public view returns (uint){
@@ -33,7 +33,34 @@ contract Coinflip{
         return now % 2;
     }
 
-    function result() public returns (bool betResult){
+
+
+    function placeBet(uint coinSelection) public payable costs(1 wei) returns(bool betResult){
+      //receive ETH into the contract as a bet and make a decision if someone won
+      /*balance += msg.value;*/
+      Gambler memory newGambler;
+      uint toTransfer;
+      address payable gambler = msg.sender;
+      newGambler.betValue = msg.value;
+      newGambler.coinGuess = coinSelection;
+      newGambler.result = random();
+      bets[gambler] = newGambler;
+
+      if (bets[gambler].result == bets[gambler].coinGuess){
+        toTransfer = bets[gambler].betValue * 2;
+        gambler.transfer(toTransfer);
+        emit Result(msg.sender, true, toTransfer);
+        return true;
+      }else{
+        /*emit Result("You lost, try next time!", msg.sender);*/
+        emit Result(msg.sender, false, 0);
+        return false;
+      }
+
+    }
+
+
+    /*function result() public returns (bool betResult){
       //function to generate 1 or 0 to indicate win
       address gambler = msg.sender;
       uint toTransfer = bets[gambler].betValue;
@@ -42,30 +69,18 @@ contract Coinflip{
         emit Result(msg.sender, true);
         return true;
       }else{
-        /*emit Result("You lost, try next time!", msg.sender);*/
+        emit Result("You lost, try next time!", msg.sender);
         emit Result(msg.sender, false);
         return false;
       }
-    }
+    }*/
 
-    function placeBet(uint coinSelection) public payable costs(1 wei){
-      //receive ETH into the contract as a bet and make a decision if someone won
-      /*balance += msg.value;*/
-      Gambler memory newGambler;
-      newGambler.betValue = msg.value;
-      newGambler.coinGuess = coinSelection;
-      newGambler.result = random();
-      insertGambler(newGambler);
-
-    }
-
-
-    function insertGambler(Gambler memory newGambler) private {
+    /*function insertGambler(Gambler memory newGambler, address ) private {
     address gambler = msg.sender;
     bets[gambler] = newGambler;
     }
 
-    /*function sendWinnings(uint betValue) public returns (uint) {
+    function sendWinnings(uint betValue) public returns (uint) {
       //send 2xETH back if user won
       address winner = msg.sender;
       uint toTransfer = bets[winner];
