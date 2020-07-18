@@ -20,6 +20,29 @@
       <div class="container">
         <h1 class="display-4">Coinflip Dapp</h1>
         <p class="lead">Get a chance to double your crypto!</p>
+        <div class="form-row">
+        <div class="form-group col-md-4 mx-auto">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary" id="contract_fund_button">Fund contract</button>
+                </div>
+                <input type="text" class="form-control" id="contract_fund_value" placeholder="Fund contract in ETH" style="text-align: center">
+            </div>
+        </div>
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-4 mx-auto">
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <button type="button"  id="contract_balance_button" class="btn btn-primary ">Contract balance</button>
+              </div>
+              <p class="form-control" id="contract_balance_text">ETH</p>
+          </div>
+      </div>
+      </div>
+        <div>
+            <button type="button" style=margin:5px id="withdraw_all_button" class="btn btn-primary">Withdraw all funds</button>
+          </div>
       </div>
     </div>
     <div class="container">
@@ -37,12 +60,25 @@
       </div>
         <button type="button" style=margin:5px id="heads" class="btn btn-primary">Heads</button>
         <button type="button" style=margin:5px id="tails" class="btn btn-primary">Tails</button>
-        <div id="selection">Select heads or tails!</div>     
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="bet_value" placeholder="Bet value in ETH (Maximum bet 10 ETH)" style="text-align: center">
-          <label class="form-control" for="bet_value">ETH</label>
+        <div id="selection">Select heads or tails!</div>
+        <div class="form-row">
+        <div class="form-group col-md-3 mx-auto">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <input type="text" class="form-control" id="bet_value" placeholder="Bet value in ETH" style="text-align: center">
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">ETH</span>
+                </div>
+
+            </div>
+          </div>
         </div>
-        <button type="button" id="bet_button" class="btn btn-primary">Press for coinflip</button>
+        <div>
+          <button type="button" style=margin:5px id="bet_button" class="btn btn-primary">Press for coinflip</button>
+        </div>
+
+
       </div>
     </div>
 
